@@ -7,10 +7,13 @@ from sklearn import datasets
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split 
 from sklearn.model_selection import GridSearchCV
-from sklearn.ensemble import RandomForestClassifier 
+from sklearn.ensemble import RandomForestClassifier, AdaBoostClassifier 
 from sklearn.naive_bayes import GaussianNB
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.tree import DecisionTreeClassifier
+from sklearn.gaussian_process import GaussianProcessClassifier
+from sklearn.gaussian_process.kernels import RBF
+from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
 from xgboost import XGBClassifier
 from sklearn import metrics
 
@@ -18,7 +21,7 @@ st.sidebar.header("""
 © Harvinder Power modified by Mehdi Olivier Doubiani
 # Input Parameters""")
 
-classificationModel = st.sidebar.selectbox("Model", ["Random Forest Classifier", "GaussianNB", "K Nearest Neighbours", "Decision Tree Classifier","XGBClassifier"])
+classificationModel = st.sidebar.selectbox("Model", ["Random Forest Classifier", "GaussianNB", "K Nearest Neighbours", "Decision Tree Classifier","XGBClassifier","GaussianProcessClassifier","AdaBoostClassifier","QuadraticDiscriminantAnalysis"])
 texture = st.sidebar.slider('Texture', 9.0, 40.0, 12.0)
 perimeter = st.sidebar.slider('Perimeter', 40.0, 190.0, 100.0)
 smoothness = st.sidebar.slider('Smoothness', 0.01, 0.18, 0.10)
@@ -66,6 +69,18 @@ if classificationModel == "Decision Tree Classifier":
 
 if classificationModel == "XGBClassifier":
     model = XGBClassifier() 
+    
+if classificationModel == "GaussianProcessClassifier":    
+    model = GaussianProcessClassifier(1.0 * RBF(1.0))
+    
+if classificationModel == "GaussianProcessClassifier":    
+    model = GaussianProcessClassifier(1.0 * RBF(1.0))    
+    
+if classificationModel == "AdaBoostClassifier":    
+    model = AdaBoostClassifier()
+
+if classificationModel == "QuadraticDiscriminantAnalysis":     
+    model = QuadraticDiscriminantAnalysis()
     
 ## Training the model and getting accuracy
 model.fit(train_x.values, train_y.values)
