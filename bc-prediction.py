@@ -69,7 +69,7 @@ if classificationModel == "XGBClassifier":
     
 ## Training the model and getting accuracy
 model.fit(train_x.values, train_y.values)
-prediction = model.predict(test_x)
+prediction = model.predict(test_x.values)
 
 accuracy = "Accuracy =", metrics.accuracy_score(prediction, test_y)
 accuracy
