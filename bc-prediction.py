@@ -21,7 +21,7 @@ st.sidebar.header("""
 © Harvinder Power modified by Mehdi Olivier Doubiani
 # Input Parameters""")
 
-classificationModel = st.sidebar.selectbox("Model", ["Random Forest Classifier", "GaussianNB", "K Nearest Neighbours", "Decision Tree Classifier","XGBClassifier","GaussianProcessClassifier","AdaBoostClassifier","QuadraticDiscriminantAnalysis"])
+classificationModel = st.sidebar.selectbox("Model", ["Random Forest Classifier", "GaussianNB", "K Nearest Neighbours", "Decision Tree Classifier","XGBClassifier","GaussianProcessClassifier","AdaBoostClassifier","QuadraticDiscriminantAnalysis","SVC","MLPClassifier"])
 texture = st.sidebar.slider('Texture', 9.0, 40.0, 12.0)
 perimeter = st.sidebar.slider('Perimeter', 40.0, 190.0, 100.0)
 smoothness = st.sidebar.slider('Smoothness', 0.01, 0.18, 0.10)
@@ -81,6 +81,13 @@ if classificationModel == "AdaBoostClassifier":
 
 if classificationModel == "QuadraticDiscriminantAnalysis":     
     model = QuadraticDiscriminantAnalysis()
+    
+if classificationModel == "SVC":     
+    model = SVC(gamma=2, C=1)
+
+if classificationModel == "MLPClassifier":     
+    model = MLPClassifier(alpha=1, max_iter=1000)
+    
     
 ## Training the model and getting accuracy
 model.fit(train_x.values, train_y.values)
