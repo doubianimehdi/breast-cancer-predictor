@@ -15,6 +15,8 @@ from sklearn.gaussian_process import GaussianProcessClassifier
 from sklearn.gaussian_process.kernels import RBF
 from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
 from xgboost import XGBClassifier
+from sklearn.svm import SVC
+from sklearn.neural_network import MLPClassifier
 from sklearn import metrics
 
 st.sidebar.header("""
