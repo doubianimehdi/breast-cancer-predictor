@@ -74,7 +74,7 @@ prediction = model.predict(test_x)
 accuracy = "Accuracy =", metrics.accuracy_score(prediction, test_y)
 accuracy
 
-prediction2 = model.predict(np.array([texture, perimeter, smoothness, compactness]).reshape(1,-1))
+prediction2 = model.predict(np.array([texture, perimeter, smoothness, compactness]).reshape(1,-1).sort_index(axis=1,inplace=True))
 
 ## Outputting prediction
 st.header('Prediction')
