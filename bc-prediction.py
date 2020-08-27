@@ -11,13 +11,14 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.naive_bayes import GaussianNB
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.tree import DecisionTreeClassifier
+from xgboost import XGBClassifier
 from sklearn import metrics
 
 st.sidebar.header("""
-© Harvinder Power
+© Harvinder Power modified by Mehdi Olivier Doubiani
 # Input Parameters""")
 
-classificationModel = st.sidebar.selectbox("Model", ["Random Forest Classifier", "GaussianNB", "K Nearest Neighbours", "Decision Tree Classifier"])
+classificationModel = st.sidebar.selectbox("Model", ["Random Forest Classifier", "GaussianNB", "K Nearest Neighbours", "Decision Tree Classifier","XGBClassifier"])
 texture = st.sidebar.slider('Texture', 9.0, 40.0, 12.0)
 perimeter = st.sidebar.slider('Perimeter', 40.0, 190.0, 100.0)
 smoothness = st.sidebar.slider('Smoothness', 0.01, 0.18, 0.10)
@@ -63,6 +64,9 @@ if classificationModel == "K Nearest Neighbours":
 if classificationModel == "Decision Tree Classifier":
     model = DecisionTreeClassifier() 
 
+if classificationModel == "XGBClassifier":
+    model = XGBClassifier() 
+    
 ## Training the model and getting accuracy
 model.fit(train_x, train_y)
 prediction = model.predict(test_x)
@@ -80,7 +84,7 @@ prediction2
 
 ##Plot heatmap
 st.header('Correlation Heatmap')
-st.write('Analysis of variables in in the dataset to determine potential correlations.')
+st.write('Analysis of variables in the dataset to determine potential correlations.')
 st.write('_Correlation between variables such as radius and perimeter are due to the derivative nature of calculation (area is derived from the radius hence ~100% correlation, not 100% due to minor rounding errors.)_')
 corr = data[features_mean].corr()
 plt.figure(figsize =(14,14))
